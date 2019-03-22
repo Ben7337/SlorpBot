@@ -14,8 +14,8 @@ Mostly fun/game commands at the moment before starting main mod commands
   <caption>Commands</caption>
   <tbody>
     <tr>
-      <td>$commands<\td>
-      <td>Displays current useable commands<\td>
+      <td>$commands</td>
+      <td>Displays current useable commands</td>
     </tr>
     <tr>
       <td>$today</td>
