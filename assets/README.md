@@ -1,3 +1,3 @@
 ## Image save folder
 
-Saved images used in the bot 
+Saved images used in the bot.
