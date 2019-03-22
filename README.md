@@ -1,4 +1,4 @@
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/discord.py.svg)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/discord.py.svg) ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
 # SlorpBot
 Moderation/fun bot for discord
 Mainly being made for the server I help run right now.
