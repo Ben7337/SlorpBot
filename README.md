@@ -1,3 +1,4 @@
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django.svg)
 # SlorpBot
 Moderation/fun bot for discord
 Mainly being made for the server I help run right now.
