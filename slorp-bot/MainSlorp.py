@@ -122,5 +122,5 @@ async def logout(ctx):
             await bot.logout()
         else:
             await ctx.send('***Bot Owner Only Command***')
-bot.run("NTM3NTIxMjQ4NTY2MTE2Mzcy.D2mnyQ._IETyZ_ec9PtUUBJ87kP2W1tzXw")
+bot.run("token")
 
