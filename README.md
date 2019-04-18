@@ -27,6 +27,10 @@ Mostly fun/game commands at the moment before starting main mod commands
       <td>Shows the clip in history from that specific day of the year</td>
     </tr>
     <tr>
+      <td>$topclip (day, week, month, all)</td>
+      <td>Shows the top clip of the day, week, month or all time according to user input</td>
+    </tr>
+    <tr>
       <td>$game</td>
       <td>Displays the game name the bot is 'now playing'</td>
     </tr>
