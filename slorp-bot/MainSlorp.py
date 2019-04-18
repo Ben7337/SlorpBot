@@ -1,17 +1,22 @@
 import asyncio
 import datetime
 import discord
+import re
 import time
 from discord.ext import commands
 from SlorpData import _dict
 from SlorpData import _dict1
 from SlorpData import _dictDate
+from twitch import TwitchClient
 #currentDT = datetime.datetime.now()
 bot = commands.Bot(command_prefix = '$')
 role_id = 275412935931723777
 role_id2 = 281239235493756928
 trash_id = 376542189175570434
 ben_id = 198318980321116169
+client = TwitchClient(client_id='TWITCHID')
+myid=82183613
+westid=130924701
 global G
 G = ""
 
@@ -29,17 +34,17 @@ async def on_message(message):
     channel = message.channel
     if bot.user.id != message.author.id:
         author = message.author
-        if message.content.lower() in _dict:
-            
+        
+        if message.content.lower() in _dict:            
             with open(_dict[message.content.lower()],'rb') as f:
                 await channel.send(file=discord.File(f))
-        if message.content.lower() in _dict1:
+        if message.content.lower() in _dict1:        
             await channel.send(_dict1.get(message.content.lower()))
         await bot.process_commands(message) #on message fix
 #--------$commands---------------------
 @bot.command()
 async def commands(ctx):
-    com = '$game $updategame [game name]\n $staff $ping $today \n $clips $date $logout'
+    com = '$game $updategame [game name]\n $staff $ping $today \n $clips $topclips $date $logout'
     embed=discord.Embed(title='**Command List **', description=com)        
     await ctx.send(embed=embed)
 #--------Show the Game playing right now------
@@ -102,6 +107,19 @@ async def clips(ctx, arg):
         Date = currentDT.strftime("%m/%d")
         embed=discord.Embed(title='**Clips In History**', description= '*Incorrect input.*\n Example for today: '+ Date)
         await ctx.send(embed=embed)
+#----------Top Clips Using Twitch Api-
+@bot.command()
+async def topclip(ctx, arg):
+    ClipNum = 1
+    if(arg=='day' or arg=='week' or arg=='month' or arg=='all'):
+        GetClips = client.clips.get_top('CHANNEL_NAME',None,None,None,ClipNum,arg)
+        Found = re.findall(r"https://clips.twitch.tv/[A-z]{6,}", str(GetClips))
+        embed=discord.Embed(title='**Top Clip: **'+ arg)
+        await ctx.send(embed=embed)
+        await ctx.send(' '.join(Found))
+    else:
+        embed=discord.Embed(title='**Top Clip: **' +arg, description= '*Incorrect input.*\n Use: day, week, month or all')
+        await ctx.send(embed=embed) 
 #----------Local Date-----------------
 @bot.command()
 async def date(ctx):
@@ -121,6 +139,6 @@ async def logout(ctx):
             await ctx.send(embed=embed)
             await bot.logout()
         else:
-            await ctx.send('***Bot Owner Only Command***')
-bot.run("token")
+            await ctx.send('***Nice try retard***')
+bot.run("TOKEN")
 
