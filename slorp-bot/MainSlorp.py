@@ -118,7 +118,7 @@ async def clips(ctx, arg):
 async def topclip(ctx, arg):
     ClipNum = 1
     if(arg=='day' or arg=='week' or arg=='month' or arg=='all'):
-        GetClips = Tclient.clips.get_top('weesterner',None,None,None,ClipNum,arg)
+        GetClips = Tclient.clips.get_top('TWITCHSTREAMER',None,None,None,ClipNum,arg)
         Found = re.findall(r"https://clips.twitch.tv/[A-z]{6,}", str(GetClips))
         embed=discord.Embed(title='**Top Clip: **'+ arg)
         await ctx.send(embed=embed)
