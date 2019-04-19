@@ -1,25 +1,25 @@
 import asyncio
 import datetime
 import discord
+import random
 import re
 import time
 from discord.ext import commands
-from SlorpData import _dict
-from SlorpData import _dict1
-from SlorpData import _dictDate
+from SlorpData import Emotes1
+from SlorpData import Emotes2
+from SlorpData import FerretList
+from SlorpData import TwitchClips
 from twitch import TwitchClient
-#currentDT = datetime.datetime.now()
 bot = commands.Bot(command_prefix = '$')
 role_id = 275412935931723777
 role_id2 = 281239235493756928
 trash_id = 376542189175570434
 ben_id = 198318980321116169
-client = TwitchClient(client_id='TWITCHID')
+Tclient = TwitchClient(client_id='TWITCH_TOKEN')
 myid=82183613
-westid=130924701
+weestid=130924701
 global G
 G = ""
-
 #--------Bot Start Up--------------
 @bot.event
 async def on_ready():
@@ -33,25 +33,33 @@ async def on_ready():
 async def on_message(message):
     channel = message.channel
     if bot.user.id != message.author.id:
-        author = message.author
-        
-        if message.content.lower() in _dict:            
-            with open(_dict[message.content.lower()],'rb') as f:
+        author = message.author        
+        if message.content.lower() in Emotes1:            
+            with open(Emotes1[message.content.lower()],'rb') as f:
                 await channel.send(file=discord.File(f))
-        if message.content.lower() in _dict1:        
-            await channel.send(_dict1.get(message.content.lower()))
+        if message.content.lower() in Emotes2:        
+            await channel.send(Emotes2.get(message.content.lower()))
         await bot.process_commands(message) #on message fix
 #--------$commands---------------------
-@bot.command()
-async def commands(ctx):
-    com = '$game $updategame [game name]\n $staff $ping $today \n $clips $topclips $date $logout'
-    embed=discord.Embed(title='**Command List **', description=com)        
-    await ctx.send(embed=embed)
+"""@bot.command() #Rename or just use $help
+#async def commands(ctx):
+#    com = '$game $updategame [game name]\n $staff $ping $today \n $clips $topclips $date $logout'
+#    embed=discord.Embed(title='**Command List **', description=com)        
+#    await ctx.send(embed=embed)
+"""
 #--------Show the Game playing right now------
 @bot.command()
 async def game(ctx):
     global G
     await ctx.send("Playing: "+G)
+#--------Ferret Thing People Wanted---
+@bot.command()
+@commands.cooldown(1, 3, commands.BucketType.channel)
+async def ferret(ctx):
+    RandFerret = random.choice(FerretList)
+    embed=discord.Embed(title="Here's a ferret!")
+    await ctx.send(embed=embed)
+    await ctx.send(RandFerret)
 #--------Update Game name-------------
 @bot.command()
 async def updategame(ctx, *args):
@@ -83,15 +91,13 @@ async def ping(ctx):
 #----------Clips in History-----------
 @bot.command()
 async def today(ctx):
-    #msg = ctx.messsage
     currentDT = datetime.datetime.now()
     Date = currentDT.strftime("%m/%d")
     FullDate = currentDT.strftime("%b %d")
-    #await ctx.send(Date)
-    if Date in _dictDate:
+    if Date in TwitchClips:
         embed=discord.Embed(title='**Today In History**', description=FullDate)
         await ctx.send(embed=embed)
-        await ctx.send(_dictDate.get(Date))
+        await ctx.send(TwitchClips.get(Date))
     else:
         embed=discord.Embed(title='**Today In History**', description= '*Nothing Here Yet Make Sure Clip Today!* ')
         await ctx.send(embed=embed)
@@ -99,10 +105,10 @@ async def today(ctx):
 @bot.command()
 async def clips(ctx, arg):
     currentDT = datetime.datetime.now()
-    if arg in _dictDate:
+    if arg in TwitchClips:
         embed=discord.Embed(title='**Clips In History**', description='Date: '+arg)
         await ctx.send(embed=embed)
-        await ctx.send(_dictDate.get(arg))
+        await ctx.send(TwitchClips.get(arg))
     else:
         Date = currentDT.strftime("%m/%d")
         embed=discord.Embed(title='**Clips In History**', description= '*Incorrect input.*\n Example for today: '+ Date)
@@ -112,7 +118,7 @@ async def clips(ctx, arg):
 async def topclip(ctx, arg):
     ClipNum = 1
     if(arg=='day' or arg=='week' or arg=='month' or arg=='all'):
-        GetClips = client.clips.get_top('CHANNEL_NAME',None,None,None,ClipNum,arg)
+        GetClips = Tclient.clips.get_top('weesterner',None,None,None,ClipNum,arg)
         Found = re.findall(r"https://clips.twitch.tv/[A-z]{6,}", str(GetClips))
         embed=discord.Embed(title='**Top Clip: **'+ arg)
         await ctx.send(embed=embed)
@@ -141,4 +147,3 @@ async def logout(ctx):
         else:
             await ctx.send('***Nice try retard***')
 bot.run("TOKEN")
-
