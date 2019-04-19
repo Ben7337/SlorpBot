@@ -15,10 +15,6 @@ Mostly fun/game commands at the moment before starting main mod commands
   <caption>Commands</caption>
   <tbody>
     <tr>
-      <td>$commands</td>
-      <td>Displays current useable commands</td>
-    </tr>
-    <tr>
       <td>$today</td>
       <td>Displays a clip that was taken on this exact day years before</td>
     </tr>
@@ -37,6 +33,10 @@ Mostly fun/game commands at the moment before starting main mod commands
     <tr>
       <td>$updategame [new game name]</td>
       <td>Updates the game name to the name you input</td>
+    </tr>
+    <tr>
+      <td>$ferret</td>
+      <td>Displays a random ferret!</td>
     </tr>
     <tr>
       <td>$staff</td>
