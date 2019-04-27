@@ -9,10 +9,8 @@ Emotes1 = {'<:weemst:482613982054842379>': 'WeemstGIF.gif',
          'ben sub': 'bensnake.png',}
 Emotes2 = {'<:forsenl:462106459623260161>': '<:pepeL:449016425323954177>',
           '<:pepel:449016425323954177>': '<:pepeL:449016425323954177>',
-          '<a:pepelaughing:551856521764536326>': '<:PepeLaugh:482600580771086345> Fuck Pogo',
-          '<:pepelaugh:482600580771086345>': '<:PepeLaugh:482600580771086345>',
-          'pogo': '<:PepeLaugh:482600580771086345> Fuck Pogo',
-          'pogos': '<:PepeLaugh:482600580771086345> Fuck Pogo'}
+          '<a:pepelaughing:551856521764536326>': '<:PepeLaugh:482600580771086345>',
+          '<:pepelaugh:482600580771086345>': '<:PepeLaugh:482600580771086345>', }
 FerretList = ['https://tenor.com/view/ferret-pets-gif-11182280',
             'https://tenor.com/view/ferret-gif-9163321',
             'https://tenor.com/view/ferret-gif-13347041',
